@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_maps/app/pages/access_gps_page.dart';
 import 'package:flutter_codigo3_maps/app/pages/home_page.dart';
+import 'package:flutter_codigo3_maps/app/pages/loading_page.dart';
 import 'package:flutter_codigo3_maps/app/utils/my_utils.dart';
 
 enum PagesMapper {
   homePage,
   accessGPS,
+  loadingPage,
 }
 
 extension PageHelper on PagesMapper {
@@ -15,6 +17,7 @@ extension PageHelper on PagesMapper {
 
   Widget Function(BuildContext) get builderRoutePage {
     switch (this) {
+      case PagesMapper.loadingPage: return (BuildContext context) => const LoadingPage();
       case PagesMapper.accessGPS: return (BuildContext context) => const AccessGPSPage();
       default:
         return (BuildContext context) => const HomePage();

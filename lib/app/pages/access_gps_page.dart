@@ -10,18 +10,35 @@ class AccessGPSPage extends StatefulWidget {
   State<AccessGPSPage> createState() => _AccessGPSPageState();
 }
 
-class _AccessGPSPageState extends State<AccessGPSPage> {
+class _AccessGPSPageState extends State<AccessGPSPage> with WidgetsBindingObserver {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Permission.location.isGranted.then(
-      (value) {
-        if (value) {
-          accessLocation(context, PermissionStatus.granted);
-        }
-      },
-    );
+    WidgetsBinding.instance!.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    print("STATE:::::: $state");
+    if(state == AppLifecycleState.resumed){
+      Permission.location.isGranted.then(
+            (value) {
+          if (value) {
+            accessLocation(context, PermissionStatus.granted);
+          }
+        },
+      );
+    }
   }
 
   @override
