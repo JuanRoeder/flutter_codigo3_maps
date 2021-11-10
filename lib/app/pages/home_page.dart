@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   CameraPosition? _initialCameraPosition;
+  GoogleMapController? _controller;
   Map<MarkerId, Marker> markers = {};
   final Set<Polyline> _polylines = {};
   final List<LatLng> _points = [];
@@ -66,8 +67,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void back2CurrentPosition() {
-
+  void back2CurrentPosition() async {
+    await initiateCurrentPosition();
+    CameraUpdate cameraUpdate = CameraUpdate.newLatLng(_initialCameraPosition!.target);
+    _controller?.animateCamera(cameraUpdate);
   }
 
   @override
@@ -102,6 +105,7 @@ class _HomePageState extends State<HomePage> {
               onMapCreated: (controller) {
                 controller.setMapStyle(json.encode(mapStyle));
                 getCurrentPositionAndController(controller);
+                _controller = controller;
               },
               polylines: _polylines,
               // onTap: (argument) async {
