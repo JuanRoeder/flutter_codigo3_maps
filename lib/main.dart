@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: PagesMapper.accessGPS.name,
+      initialRoute: PagesMapper.loadingPage.name,
       routes: buildMapRouter(),
     );
   }

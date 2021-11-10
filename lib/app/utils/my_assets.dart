@@ -4,11 +4,13 @@ String _assetsImages = "assets/images";
 
 enum MyAssetsImages {
   hospital,
+  truck,
 }
 
 extension MyAssetsImagesHelper on MyAssetsImages {
   String get src {
     switch (this) {
+      case MyAssetsImages.truck: return "$_assetsImages/box-truck.png";
       default:
         return "$_assetsImages/hospital.png";
     }

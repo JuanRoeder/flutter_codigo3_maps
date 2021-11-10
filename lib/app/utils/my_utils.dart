@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EnumValues<T> {
   Map<String, T> map;
@@ -131,3 +133,7 @@ Map<int, Color> buildMapColor(int color) => {
   for (int i = 0; i < _shadeIndex.length; i++)
     _shadeIndex[i]: Color(color).withOpacity((i + 1) / 10)
 };
+
+extension PositionHelper on Position{
+  LatLng toLatLng() => LatLng(latitude, longitude);
+}
